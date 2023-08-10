@@ -1,0 +1,15 @@
+{
+  "customer": [
+    {
+      "firstname": "tushar",
+      "lastname": "Jain",
+      "DOB": "12/09/34",
+      "Adhaar": "",
+      "add": "cbhb",
+      "MobileNumber": "12345688990",
+      "PAN": "",
+      "Occupation": "",
+      "id": 1
+    }
+  ]
+}
