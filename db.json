@@ -1,0 +1,141 @@
+{
+  "customer-details": [
+    {
+      "firstName": "Tushar",
+      "lastName": "Singhal",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "Hyderabad",
+      "mobileNumber": "08117876133",
+      "pan": 0,
+      "occupation": "",
+      "id": 1
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": "12345678954",
+      "pan": 0,
+      "occupation": "",
+      "id": 2
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": "12345678954x",
+      "pan": 0,
+      "occupation": "",
+      "id": 3
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": "12345678954x",
+      "pan": 0,
+      "occupation": "",
+      "id": 4
+    },
+    {
+      "firstName": "xcc",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": 0,
+      "pan": 0,
+      "occupation": "",
+      "id": 5
+    },
+    {
+      "firstName": "sw",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": 0,
+      "pan": 0,
+      "occupation": "",
+      "id": 6
+    },
+    {
+      "firstName": "sw",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "dee",
+      "mobileNumber": "013",
+      "pan": 0,
+      "occupation": "",
+      "id": 7
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": 0,
+      "pan": 0,
+      "occupation": "",
+      "id": 8
+    },
+    {
+      "firstName": "dc",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": 0,
+      "pan": 0,
+      "occupation": "",
+      "id": 9
+    },
+    {
+      "firstName": "dc",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "",
+      "mobileNumber": "0123",
+      "pan": 0,
+      "occupation": "",
+      "id": 10
+    },
+    {
+      "firstName": "dc",
+      "lastName": "",
+      "dob": "",
+      "aadhar": 0,
+      "permanentAddress": "sdd",
+      "mobileNumber": "0123",
+      "pan": 0,
+      "occupation": "",
+      "id": 11
+    }
+  ],
+  "Account-Summary": [
+    {
+      "id": "1",
+      "firstName": "tushar",
+      "lastName": "Jain",
+      "AccountNumber": "1234893",
+      "AccountBalance": "$900"
+    },
+    {
+      "id": "2",
+      "firstName": "Aditya",
+      "lastName": "Jain",
+      "AccountNumber": "1234893",
+      "AccountBalance": "$900"
+    }
+  ]
+}
