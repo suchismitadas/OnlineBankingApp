@@ -2,17 +2,17 @@ import React from 'react';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-//import FormLabel from 'react-bootstrap/esm/FormLabel';
+// import FormLabel from 'react-bootstrap/esm/FormLabel';
 import Button from 'react-bootstrap/esm/Button';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import FormControl from '@mui/joy/FormControl';
+// import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
-import Input from '@mui/joy/Input';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+// import FormHelperText from '@mui/joy/FormHelperText';
+// import Input from '@mui/joy/Input';
+import { CssVarsProvider } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
+// import Typography from '@mui/joy/Typography';
 
 
 const Register = () => {

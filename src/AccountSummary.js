@@ -16,7 +16,7 @@ const AccountSummary= ()=>{
             }).then ((resp) => {
                 // console.log(resp);
                 setDetails(resp);
-                console.log(details);
+                // console.log(details);
             }).catch((err) => {
                 console.log(err.message);
             })  

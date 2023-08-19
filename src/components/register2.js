@@ -60,7 +60,7 @@ function Register2() {
 
   <div class="container" >
     <Link to="/login"><button type="button" class="cancelbtn">Cancel</button></Link>
-    <span class="psw">Forgot <a href="#">password?</a></span>
+    {/* <span class="psw">Forgot <a href="#">password?</a></span> */}
   </div>
 </form>
 </div>

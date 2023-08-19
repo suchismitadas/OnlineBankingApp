@@ -9,7 +9,7 @@ import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useForm} from "react-hook-form";
 import { useState } from "react";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from 'axios';
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
@@ -43,7 +43,7 @@ export default function LoginFinal() {
 
     const {register,handleSubmit ,formState:{errors}} = useForm();
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const {reset} = useForm();
+    // const {reset} = useForm();
     const onSubmit = async (data,e) =>{
       
         console.log(data);

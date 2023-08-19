@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import { Paper,Card } from "@mui/material";
+import {Card } from "@mui/material";
 import { AspectRatio } from "@mui/joy";
 
 
@@ -32,7 +32,7 @@ const Home =() =>{
         <Box sx={{ minWidth: 275 }}>
       <Card variant="outlined" sx={{ width: 500 }}>
       <AspectRatio  variant="outlined">
-        <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Wellsfargohq.jpg/800px-Wellsfargohq.jpg" ></img></div>
+        <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Wellsfargohq.jpg/800px-Wellsfargohq.jpg" alt="wiki"></img></div>
         
        
        </AspectRatio>
