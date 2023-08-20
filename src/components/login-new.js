@@ -2,15 +2,17 @@ import * as React from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
+// import FormControl from '@mui/joy/FormControl';
+// import FormLabel from '@mui/joy/FormLabel';
+// import Input from '@mui/joy/Input';
+// import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
 import { useForm} from "react-hook-form";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
+import {Button, Field, Form, Input} from "./Forms";
+
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
   const [mounted, setMounted] = React.useState(false);
@@ -29,7 +31,7 @@ function ModeToggle() {
 
   return (
     <Button
-      variant="soft"
+      variant="primary"
       onClick={() => {
         setMode(mode === 'light' ? 'dark' : 'light');
       }}
@@ -39,12 +41,12 @@ function ModeToggle() {
   );
 }
 
-export default function LoginFinal() {
+export default function Login() {
 
-    const {register,handleSubmit ,formState:{errors}} = useForm();
+    const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
     const [isSubmitted, setIsSubmitted] = useState(false);
-    // const {reset} = useForm();
-    const onSubmit = async (data,e) =>{
+    
+    const doLogin = async (data) =>{
       
         console.log(data);
         try {
@@ -52,11 +54,10 @@ export default function LoginFinal() {
             console.log(res);
             const tokenGenerated = res.data;
             localStorage.setItem('token', tokenGenerated);
-            // console.log(localStorage.getItem('token'));
-
+            localStorage.setItem('id', data.id);
             setIsSubmitted(true);
         }
-        catch {
+        catch(error) {
         
         }
         // it will output the data on the consol
@@ -94,58 +95,26 @@ export default function LoginFinal() {
             </Typography>
             <Typography level="body-sm">Sign in to continue.</Typography>
           </div>
-         <form onSubmit = {handleSubmit(onSubmit)}> 
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input
-              // html input attribute
-              name="email"
-              type="text"
-              placeholder="johndoe@email.com"
-              defaultValue = "" 
-              {...register("userName",
-                //   {required: "Email is required.",
-                //   pattern: {
-                //       value : /^[^@ ]+@[^@]+\.[^@.]{2,}$/,
-                //       message : "Email is not valid."
-                //   }
-              )}
-              />
-              {errors.email && <p className = "errorMsg">{errors.email.message}</p>}
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input
-              // html input attribute
-              name="password"
-              type="password"
-              placeholder="password"
-              defaultValue = "" 
-              {...register("password",
-                  {required: "Password is required.",
-                  minLength : {
-                      value :6,
-                      message: "Password should be atleast 6 characters"
-                  },
-                  maxLength : {
-                      value : 12,
-                      message : "Password should not exceed beyond 12 characters"
-                  }
-              })}
-              />
-              {errors.password && <p className = "errorMsg">{errors.password.message}</p>}
-          </FormControl>
-            <div className="container d-flex align-items-center flex-column">
-                
-                    
-                    <Button type = "submit" sx={{ mt: 1 /* margin top */ }}>
-                    Login
-                  </Button>
-                  
-                  </div>
-         {/* <Button  type="submit" sx={{ mt: 1  }}>
-            Log in</Button> */}
-          </form>
+         <Form onSubmit = {handleSubmit(doLogin)}> 
+         <Field label="Customer-ID" error={errors?.id}>
+          <Input
+            {...register("id", { required: "Customer-ID is required"})}
+            type="number"
+            id="id"
+          />
+        </Field>
+        <Field label="Password" error={errors?.password}>
+          <Input
+            {...register("password", { required: "Password is required", pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                message: "Please check all the conditions of password"
+            } })}
+            type="password"
+            id="password"
+          />
+        </Field>    
+         <Button>Login</Button>
+          </Form>
           <Typography
             endDecorator={<Link href="/register">Sign up</Link>}
             fontSize="sm"

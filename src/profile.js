@@ -1,25 +1,44 @@
 import React from "react";
 // import Navbar from "./components/navbar";
 import { Card,AspectRatio,Typography } from "@mui/joy";
-// import axios from "axios";
-// import {useState,useEffect} from "react";
+import axios from "axios";
+import {useState,useEffect} from "react";
 
 const Profile=()=>{
 
-    // const[detail,setDetail]=useState([]);
+    const[detail,setDetail]=useState(null);
+    const[error, setError] = useState(null);
+    const[loading, setLoading] = useState(true);
 
     // useEffect
-    // const tokenGot = localStorage.getItem('token');
-    // async function  getData(){
-    //     const data = await axios.get(`http://localhost:8080/customer-details/${tokenGot}`).then((res)=>{
-    //         console.log(res.data);
-    //         setDetail(res.data);
-    //     });
-    // };
+
+    useEffect(() => {
+      const getData = async () => {
+        const loggedInID = localStorage.getItem('id');
+        const token = localStorage.getItem('token');
+        const header = `Authorization: Bearer ${token}`;
+        try {
+          const res = await axios.get(`http://localhost:8080/customer-details/${loggedInID}`, {headers: header});
+          setDetail(res.data);
+          console.log(res);
+          setError(null);
+        } catch(error) {
+          setError(error);
+          setDetail(null);
+        } finally {
+          setLoading(false);
+        }
+      };
+      getData();
+    }, []);
+  
 
     return (
         <> 
-        
+        {loading && <div>A moment please...</div>}
+      {error && (
+        <div>{`There is a problem fetching the post data - ${error}`}</div>
+      )}
         <Card variant="outlined" sx={{ width: 300 }}>
   <AspectRatio  variant="outlined"
   >

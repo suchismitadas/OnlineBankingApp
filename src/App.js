@@ -5,7 +5,7 @@ import Dashlist from './components/dashlist';
 import Welcome from './components/welcome';
 import AccountSummary from "./AccountSummary";
 import AccountTransactions from "./AccountTransactions"
-import Login from './components/login-copy'
+import Login from './components/login-new'
 import Register2 from './components/register2';
 import Profile from './profile';
 import { RegisterNew } from './components/register-new';
