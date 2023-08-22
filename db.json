@@ -3,139 +3,66 @@
     {
       "firstName": "Tushar",
       "lastName": "Singhal",
-      "dob": "",
-      "aadhar": 0,
+      "dob": "12-04-2000",
+      "aadhar": "1234 5678 6789 ",
       "permanentAddress": "Hyderabad",
       "mobileNumber": "08117876133",
-      "pan": 0,
-      "occupation": "",
+      "pan": "234rf345",
+      "occupation": "Job",
       "id": 1
-    },
-    {
-      "firstName": "",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": "12345678954",
-      "pan": 0,
-      "occupation": "",
-      "id": 2
-    },
-    {
-      "firstName": "",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": "12345678954x",
-      "pan": 0,
-      "occupation": "",
-      "id": 3
-    },
-    {
-      "firstName": "",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": "12345678954x",
-      "pan": 0,
-      "occupation": "",
-      "id": 4
-    },
-    {
-      "firstName": "xcc",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": 0,
-      "pan": 0,
-      "occupation": "",
-      "id": 5
-    },
-    {
-      "firstName": "sw",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": 0,
-      "pan": 0,
-      "occupation": "",
-      "id": 6
-    },
-    {
-      "firstName": "sw",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "dee",
-      "mobileNumber": "013",
-      "pan": 0,
-      "occupation": "",
-      "id": 7
-    },
-    {
-      "firstName": "",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": 0,
-      "pan": 0,
-      "occupation": "",
-      "id": 8
-    },
-    {
-      "firstName": "dc",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": 0,
-      "pan": 0,
-      "occupation": "",
-      "id": 9
-    },
-    {
-      "firstName": "dc",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "",
-      "mobileNumber": "0123",
-      "pan": 0,
-      "occupation": "",
-      "id": 10
-    },
-    {
-      "firstName": "dc",
-      "lastName": "",
-      "dob": "",
-      "aadhar": 0,
-      "permanentAddress": "sdd",
-      "mobileNumber": "0123",
-      "pan": 0,
-      "occupation": "",
-      "id": 11
     }
   ],
   "Account-Summary": [
     {
       "id": "1",
-      "firstName": "tushar",
-      "lastName": "Jain",
-      "AccountNumber": "1234893",
-      "AccountBalance": "$900"
+      "type": "Savings",
+      "ifscCode": "fellas0001",
+      "accountNumber": "1234893",
+      "balance": "$900",
+      "status": "open"
+    }
+  ],
+  "History": [
+    {
+      "id": 1,
+      "date": "2023-08-11",
+      "type": "imps",
+      "fromAccount": 1,
+      "toAccount": 2,
+      "status": "complete"
     },
     {
-      "id": "2",
-      "firstName": "Aditya",
-      "lastName": "Jain",
-      "AccountNumber": "1234893",
-      "AccountBalance": "$900"
+      "id": 1,
+      "date": "2023-08-21",
+      "type": "neft",
+      "fromAccount": 1,
+      "toAccount": 2,
+      "status": "complete"
+    },
+    {
+      "id": 1,
+      "date": "2023-05-11",
+      "type": "imps",
+      "fromAccount": 1,
+      "toAccount": 3,
+      "status": "complete"
+    },
+    {
+      "id": 1,
+      "date": "2022-08-11",
+      "type": "upi",
+      "fromAccount": 1,
+      "toAccount": 34,
+      "status": "complete"
+    },
+    {
+      "fromAccount": "123",
+      "toAccount": "432",
+      "Amount": "345",
+      "Remark": "drfc",
+      "type": "NEFT",
+      "date": "2023-08-22T09:18:22.534Z",
+      "id": 2
     }
   ]
 }

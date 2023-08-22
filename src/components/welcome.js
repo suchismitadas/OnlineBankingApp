@@ -3,13 +3,14 @@ import React from "react";
 import Profile from "../profile";
 
 import Navbar from "./navbar";
+import Home from "../Home";
 
 const welcome =()=>{
     return(
         <>
-        <h1 style={{color:"yellow" }}>Welcome to your account </h1>
-        <Navbar/>
-        <Profile/>
+        <h1 style={{color:"yellow" }}> </h1>
+    
+       <Profile/>
         </>
     )
     

@@ -12,6 +12,7 @@ import { RegisterNew } from './components/register-new';
 import { PersonalDetails } from './components/PersonalDetails';
 import { Confirm } from './components/Confirm';
 import { AppProvider } from './components/state';
+import History from './components/History';
 function App() {
   // const { register,handleSubmit, formState : {errors} } = useForm();
   //   const onSubmit = (e) =>{
@@ -36,6 +37,7 @@ function App() {
           <Route path="/register-new" element={<RegisterNew />} />
           <Route path="/personal-details" element={<PersonalDetails />} />
           <Route path="/confirm" element={<Confirm />} />
+          <Route path="/history" element={<History/>}/>
       </Routes>
       </Router>
     </AppProvider>

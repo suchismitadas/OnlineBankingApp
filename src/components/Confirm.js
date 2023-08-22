@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { useAppState } from "./state";
 import { Button, Form, Section, SectionRow } from "./Forms";
 import { Sheet, CssVarsProvider } from "@mui/joy";
-import axios
- from "axios";
+import axios from "axios";
+import { Link } from "react-router-dom";
 export const Confirm = () => {
   const [state] = useAppState();
   // console.log(state);
@@ -88,7 +88,7 @@ const [id, setId] = useState(null);
       <div className="d-flex justify-content-start">
         <Button>Submit</Button>
       </div>
-      {registered && <p>Success! Your customer id is {id}. Use this for login to internet banking.</p>}
+      {registered && <p>Success! Your customer id is {id}. Use this for <Link to="/login"> login</Link>  to internet banking.</p>}
     </Form>
     </Sheet>
     </CssVarsProvider>
