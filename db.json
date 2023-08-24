@@ -6,12 +6,40 @@
       "dob": "12-04-2000",
       "aadhar": "1234 5678 6789 ",
       "permanentAddress": "Hyderabad",
-      "mobileNumber": "08117876133",
+      "mobileNumber": "8117876133",
       "pan": "234rf345",
       "occupation": "Job",
-      "id": 1
-    }
-  ],
+      "id": 1,
+      "account": {
+        "type": "Savings",
+        "ifscCode": "fellas0001",
+        "accountNumber": "1234893",
+        "balance": "$900",
+        "status": "open"
+      }
+    },
+  
+      {
+        "firstName": "Aditya",
+        "lastName": "Singhal",
+        "dob": "12-04-2000",
+        "aadhar": "1234 5678 6789 ",
+        "permanentAddress": "Hyderabad",
+        "mobileNumber": "8117876133",
+        "pan": "234rf345",
+        "occupation": "Job",
+        "id": 2,
+        "account":[ {
+          "type": "Savings",
+          "ifscCode": "fellas0001",
+          "accountNumber": "1234893",
+          "balance": "$900",
+          "status": "open"
+        }
+      ]
+      }
+    ]
+  ,
   "Account-Summary": [
     {
       "id": "1",
