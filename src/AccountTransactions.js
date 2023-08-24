@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
-import { useAppState } from "./components/state";
+// import { useNavigate, Link } from "react-router-dom";
+// import { useAppState } from "./components/state";
 import { Button, Field, Form, Input } from "./components/Forms";
 import { Row, Col } from "react-bootstrap";
 import { Sheet, CssVarsProvider } from "@mui/joy";
@@ -12,6 +12,8 @@ const AccountTransactions = () => {
 
 // 
     const [success, setSuccess] = useState();
+    const [error, setError] = useState({});
+const [hasError, setHasError] = useState(false);
     // console.log(state);
     const { handleSubmit, register, formState: { errors } } = useForm();
     // const navigate = useNavigate();
@@ -19,17 +21,28 @@ const AccountTransactions = () => {
     const saveData = async (data) => {
         // setState({ ...state, customerDetails: data });
         //   navigate("/confirm");
-        data = {...data, date:new Date()};
+        let date = new Date();
+        let month = date.getMonth()+1;
+        let currentDate= date.getFullYear()+"-"+(month < 10 ? "0"+month:month)+"-"+date.getDate();
+        data = {...data, fromAccount: parseInt(data.fromAccount), toAccount: parseInt(data.toAccount), 
+            amount: parseInt(data.amount), date: currentDate, status: "completed"};
+        console.log(data);
+        console.log(JSON.stringify(data));
         try {
         const token = localStorage.getItem('token');
-        const header = `Authorization: Bearer ${token}`;
+        const header = {
+            
+        Authorization: `Bearer ${token}`
+        };
         const loggedInID = localStorage.getItem('id');
-        const res = await axios.post("http://localhost:3000/History",data);
+        const res = await axios.post(`http://localhost:8080/transactions/`,data, {headers: header});
 
         console.log(res);
         setSuccess(true);
         } catch(error) {
-
+            setHasError(true);
+      setError(error.response.data);
+      console.log(error.response.data);
         }
 
     };
@@ -80,28 +93,28 @@ const AccountTransactions = () => {
                         </Row>
 
                         <div class="row mb-3">
-                            <Field label="Amount"  error={errors?.Amount}>
+                            <Field label="amount"  error={errors?.amount}>
                                 <Input
-                                    {...register("Amount", {
+                                    {...register("amount", {
                                         required: "Amount is required",
                                         min:{ value:0, message:"Enter only positive numbers"},
                                         
                                     })}
-                                    id="Amount"
+                                    id="amount"
                                     type="number"
                                 />
                             </Field>
                         </div>
 
                         <div class="row mb-3">
-                        <Field label="Remark"  error={errors?.Remark}>
+                        <Field label="remark"  error={errors?.Remark}>
                                 <Input
-                                    {...register("Remark", {
+                                    {...register("remark", {
                                         required: "Remark is required",
                                         
                                         
                                     })}
-                                    id="Remark"
+                                    id="remark"
                                     type="text"
                                 />
                             </Field>
@@ -141,12 +154,12 @@ const AccountTransactions = () => {
 
                     </Form>
 
-
-
-
-
                     {/* <Link to="/login/welcome"><p style={{ color: "white" }}>Go to dashboard</p></Link> */}
                     {success && <p><b>Transaction is Successfull </b></p>}
+                    {hasError && <div>
+        <p style={{textAlign: 'center'}}> <strong>{error.property}</strong>: {error.code}. <br></br>
+        <strong>Description: </strong>{error.message}</p>
+        </div>}
                 </Sheet>
             </CssVarsProvider>
         </div>

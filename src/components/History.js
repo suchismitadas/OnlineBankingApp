@@ -12,12 +12,25 @@ const History=()=>{
     const [accthistory,setAccthistory] = useState([]);
     useEffect(()=> {
         console.log("This is running");
-        const data = axios.get("http://localhost:3000/History").then((response)=>{
+
+        const getData = async () => {
+            const loggedInID = localStorage.getItem('id');
+            const token = localStorage.getItem('token');
+            const header = {
+            
+                Authorization: `Bearer ${token}`
+                };
+              try {  
+             const response = await axios.get(`http://localhost:8080/transactions/${loggedInID}`, {headers: header});
+    
             console.log(response.data);
-            setAccthistory(response.data);
-            console.log(accthistory);
-        });
-    },{});
+            setAccthistory(response.data);   
+              } catch(error) {
+                console.log(error);
+              }
+        }
+        getData();
+    },[]);
 
     return(
         <>
@@ -65,6 +78,8 @@ const History=()=>{
                 <th> Type</th>
                 <th> From Account</th>
                 <th> To Account</th>
+                <th>Amount</th>
+                <th>Remark</th>
                 {/* <th> Status</th> */}
             </tr>
             </thead>
@@ -76,6 +91,8 @@ const History=()=>{
                         <td>{val.type}</td>
                         <td>{val.fromAccount}</td>
                         <td>{val.toAccount}</td>
+                        <td>${val.amount}</td>
+                        <td>{val.remark}</td>
                         {/* <td>{val.status}</td> */}
                     </tr>
                 )

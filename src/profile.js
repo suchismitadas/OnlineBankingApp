@@ -23,7 +23,7 @@ const Profile = () => {
             const token = localStorage.getItem('token');
             const header = `Authorization: Bearer ${token}`;
             try {
-                const res = await axios.get(`http://localhost:3000/customer-details/1`, { headers: header });
+                const res = await axios.get(`http://localhost:8080/customer-details/${loggedInID}`, { headers: header });
                 setDetail(res.data);
                 console.log(res);
                 setError(null);

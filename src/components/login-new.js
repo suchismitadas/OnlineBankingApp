@@ -7,7 +7,7 @@ import Typography from '@mui/joy/Typography';
 // import Input from '@mui/joy/Input';
 // import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
-import { useForm} from "react-hook-form";
+import { set, useForm} from "react-hook-form";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from 'axios';
@@ -45,20 +45,20 @@ export default function Login() {
 
     const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
     const [isSubmitted, setIsSubmitted] = useState(false);
-    
+    const [hasError, setHasError] = useState(false); 
     const doLogin = async (data) =>{
       
         console.log(data);
         try {
             const res = await axios.post("http://localhost:8080/login", data);
             console.log(res);
-            const tokenGenerated = res.data;
+            const tokenGenerated = res.data.message;
             localStorage.setItem('token', tokenGenerated);
             localStorage.setItem('id', data.id);
             setIsSubmitted(true);
         }
         catch(error) {
-        
+        setHasError(true);
         }
         // it will output the data on the consol
        
@@ -115,6 +115,8 @@ export default function Login() {
         </Field>    
          <Button>Login</Button>
           </Form>
+          {hasError && <p><b>Wrong credentials or server error.</b></p>}
+
           <Typography
             endDecorator={<Link href="/register">Sign up</Link>}
             fontSize="sm"

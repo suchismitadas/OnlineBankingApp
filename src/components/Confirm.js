@@ -11,6 +11,8 @@ export const Confirm = () => {
   // console.log(state);
   const { handleSubmit } = useForm({ defaultValues: state });
 const [registered, setRegistered] = useState(false);
+const [error, setError] = useState({});
+const [hasError, setHasError] = useState(false);
 const [id, setId] = useState(null);
   const submitData = async (data) => {
     console.log(data);
@@ -23,7 +25,9 @@ const [id, setId] = useState(null);
       setRegistered(true);
       setId(res.data.id);
     } catch(error) {
-      // console.log(error.response.data);
+      setHasError(true);
+      setError(error.response.data);
+      console.log(error.response.data);
     }
   };
 
@@ -89,6 +93,10 @@ const [id, setId] = useState(null);
         <Button>Submit</Button>
       </div>
       {registered && <p>Success! Your customer id is {id}. Use this for <Link to="/login"> login</Link>  to internet banking.</p>}
+      {hasError && <div>
+        <p style={{textAlign: 'center'}}> <strong>{error.property}</strong>: {error.code}. <br></br>
+        <strong>Description: </strong>{error.message}</p>
+        </div>}
     </Form>
     </Sheet>
     </CssVarsProvider>

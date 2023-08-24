@@ -5,22 +5,36 @@ import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import Navbar from "./components/navbar";
 import { Sheet } from "@mui/joy";
+import axios from "axios";
 
 const AccountSummary= ()=>{
 
-        const [details,setDetails]=useState({});
+        const [details,setDetails]=useState([]);
+       
+        useEffect( () => {
 
-        useEffect(() => {
+          const getData = async () => {
             console.log("I am running");
-            fetch("http://localhost:3000/Account-Summary/1").then((res) => {
-                return res.json();
-            }).then ((resp) => {
-                // console.log(resp);
-                setDetails(resp);
+            const loggedInID = localStorage.getItem('id');
+            const token = localStorage.getItem('token');
+            const header = {
+            
+              Authorization: `Bearer ${token}`
+              };
+
+            try {
+            const res = await axios.get(`http://localhost:8080/accounts/${loggedInID}`, {headers: header});
+          
+                console.log(res);
+                setDetails(res.data);
+                console.log(details);
+            } catch(error) {
+              console.log(error.message);
+            }
                 // console.log(details);
-            }).catch((err) => {
-                console.log(err.message);
-            })  
+          }
+          getData();
+
         }, [])
 
     return (
@@ -45,28 +59,32 @@ const AccountSummary= ()=>{
         <h3 style={{fontFamily:"Times New Roman"}} >Account summary</h3>
         <Table striped bordered hover>
       <tbody>
-      <tr>
+        {details.map((val, key) => {
+          return (<><tr>
           <th>TYPE</th>
-          <th>{details.type}</th>
+          <th>{val.type}</th>
         </tr>
         <tr>
           <td>IFSC Code</td>
-          <td>{details.ifscCode}</td>
+          <td>{val.ifscCode}</td>
           
         </tr>
        
         <tr>
           <td>Account Number</td>
-          <td>{details.accountNumber}</td>
+          <td>{val.accountNumber}</td>
         </tr>
         <tr>
           <td>Available Balance</td>
-          <td>{details.balance}</td>
+          <td>{val.balance}</td>
         </tr>
         <tr>
           <td>Status</td>
-          <td>{details.status}</td>
-        </tr>
+          <td>{val.status}</td>
+        </tr></>
+        )
+        })}
+      
       </tbody>
     </Table>
         <Link to="/login/welcome">Go to dashboard</Link>

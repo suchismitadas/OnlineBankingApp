@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { AspectRatio, Avatar } from "@mui/joy";
+import {Stack }from "@mui/joy";
 
 
 const Home = () => {
@@ -73,6 +74,7 @@ const Home = () => {
                   </Sheet>
                 </Grid>
                 <Grid xs>
+                  <Stack spacing={6}>
                   <Sheet sx={{
                     width: 600,
                     mx: 'auto', // margin left & right
@@ -97,6 +99,30 @@ const Home = () => {
                       </nav>
                     </div>
                   </Sheet>
+
+                  <Sheet sx={{
+                    width: 600,
+                    mx: 'auto', // margin left & right
+                    my: 4, // margin top & bottom
+                    py: 3, // padding top & bottom
+                    px: 2, // padding left & right
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    borderRadius: 'sm',
+                    boxShadow: 'md',
+                  }}
+                    variant="outlined">
+                    <div className="container d-flex align-items-left flex-column" style={{ color: "white" }} >
+                      <nav>
+                        <h4 style={{ fontFamily: "Times New Roman", color: "Black" }}> Welcom Admin !</h4>
+                        <NavLink to="/adminlogin">
+                          <Button sx={{ mt: 1 /* margin top */ }} >Login</Button></NavLink>
+                        
+                      </nav>
+                    </div>
+                  </Sheet>
+                  </Stack>
                 </Grid>
               </Grid>
 
@@ -135,6 +161,7 @@ const Home = () => {
                   </Sheet>
                 </Grid>
                 <Grid xs>
+                  <Stack spacing={6}>
                   <Sheet sx={{
                     width: 600,
                     mx: 'auto', // margin left & right
@@ -160,6 +187,29 @@ const Home = () => {
                       </nav>
                     </div>
                   </Sheet>
+                  <Sheet sx={{
+                    width: 600,
+                    mx: 'auto', // margin left & right
+                    my: 4, // margin top & bottom
+                    py: 3, // padding top & bottom
+                    px: 2, // padding left & right
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 2,
+                    borderRadius: 'sm',
+                    boxShadow: 'md',
+                  }}
+                    variant="outlined">
+                    <div className="container d-flex align-items-left flex-column" style={{ color: "white" }} >
+                      <nav>
+                        <h4 style={{ fontFamily: "Times New Roman", color: "Black" }}> Welcome Admin !</h4>
+                        <NavLink to="/adminlogin">
+                          <Button sx={{ mt: 1 /* margin top */ }} >Login</Button></NavLink>
+                        
+                      </nav>
+                    </div>
+                  </Sheet>
+                  </Stack>
                 </Grid>
               </Grid>
             </Box>

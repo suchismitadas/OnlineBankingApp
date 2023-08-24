@@ -13,6 +13,8 @@ import { PersonalDetails } from './components/PersonalDetails';
 import { Confirm } from './components/Confirm';
 import { AppProvider } from './components/state';
 import History from './components/History';
+import Adminlogin from './components/login';
+import Admin from './components/admin';
 function App() {
   // const { register,handleSubmit, formState : {errors} } = useForm();
   //   const onSubmit = (e) =>{
@@ -38,6 +40,8 @@ function App() {
           <Route path="/personal-details" element={<PersonalDetails />} />
           <Route path="/confirm" element={<Confirm />} />
           <Route path="/history" element={<History/>}/>
+          <Route path="/adminlogin" element={<Adminlogin/>}/>
+          <Route path="/login/admin" element={<Admin/>}/>
       </Routes>
       </Router>
     </AppProvider>

@@ -1,101 +1,134 @@
-import React from "react";
+import * as React from 'react';
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
+// import FormControl from '@mui/joy/FormControl';
+// import FormLabel from '@mui/joy/FormLabel';
+// import Input from '@mui/joy/Input';
+// import Button from '@mui/joy/Button';
+import Link from '@mui/joy/Link';
 import { useForm} from "react-hook-form";
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../App.css";
+import { Navigate } from "react-router-dom";
+import axios from 'axios';
+import {Button, Field, Form, Input} from "./Forms";
 
-function Login(){
-    const {register,handleSubmit ,formState:{errors}} = useForm();
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const {reset} = useForm();
-    const onSubmit = (data,e) =>{
-      setIsSubmitted(true);
-        console.log(data,e);
-        // it will output the data on the console
-    };
-    const onError = (errors, e) =>{
-        console.log(errors,e);
-    };
-    return(
-        <div 
-        
-        className = "login">
-            <h2 className="container d-flex align-items-center flex-column">Login to your account</h2>
-            <p className="container d-flex align-items-center flex-column">Didn't Register yet? <Link to="/register">Register now</Link></p>
-            <form onSubmit = {handleSubmit(onSubmit)}>
-                <div 
-                className="container d-flex align-items-center flex-column">
-                    <label>Email:   </label>
-                    <input 
-                    type = "text" 
-                    placeholder = "email" 
-                    name = "name" 
-                    defaultValue = "" 
-                    {...register("email",
-                        {required: "Email is required.",
-                        pattern: {
-                            value : /^[^@ ]+@[^@]+\.[^@.]{2,}$/,
-                            message : "Email is not valid."
-                        }
-                    })}
-                    />
-                    {errors.email && <p className = "errorMsg">{errors.email.message}</p>}
-                    {/* {errors.email && errors.email.type === "required" && (
-                        <p className = "errorMSg">Email is required.</p>
-                    )}
-                    {errors.email && errors.email.type==="pattern" && (
-                        <p className = "errorMsg">Email is not valid.</p>
-                    )} */}
-                </div>
-                <div className="container d-flex align-items-center flex-column">
-                    <label>Password:    </label>
-                    <input 
-                    type = "password" 
-                    placeholder = "password" 
-                    name = "password" 
-                    defaultValue = "" 
-                    {...register("password",
-                        {required: "Password is required.",
-                        minLength : {
-                            value :6,
-                            message: "Password should be atleast 6 characters"
-                        },
-                        maxLength : {
-                            value : 12,
-                            message : "Password should not exceed beyond 12 characters"
-                        }
-                    })}
-                    />
-                    {errors.password && <p className = "errorMsg">{errors.password.message}</p>}
-                    {/* {errors.password && errors.password.type === "required" && (
-                        <p className = "errorMsg">Password is required</p>
-                    )}
-                    {errors.password && errors.password.type === "minLength"  && (
-                        <p className = "errorMsg"> Password should be atleast 6 characters.</p>
-                    )} */}
-                </div>
-                <div className="container d-flex align-items-center flex-column">
-                  {/* <Link to="/login/welcome">  */}
-                  {isSubmitted?
-                    <Link to="/login/welcome">
-                      <Button type = "submit">
-                        Login
-                    </Button>   
-                    </Link>
-                    
-                    :<Button type = "submit">
-                    Login
-                </Button>
-                  }
-                  
-                    {/* </Link> */}
-                    <p><Link to="/">Home</Link></p>  
-                </div>
-            </form>
-            
-        </div>
-    );
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // necessary for server-side rendering
+  // because mode is undefined on the server
+ 
+ 
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <Button
+      variant="primary"
+      onClick={() => {
+        setMode(mode === 'light' ? 'dark' : 'light');
+      }}
+    >
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+    </Button>
+  );
 }
-export default Login;
+
+export default function Login() {
+
+    const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [hasError, setHasError] = useState(false);
+    const [errorDetail, setErrorDetail] = useState({});
+    const doLogin = async (data) =>{
+      
+        console.log(data);
+        try {
+            const res = await axios.post("http://localhost:8080/login", data);
+            console.log(res);
+            const tokenGenerated = res.data.message;
+            localStorage.setItem('token', tokenGenerated);
+            localStorage.setItem('id', data.id);
+            setIsSubmitted(true);
+        }
+        catch(error) {
+            setHasError(true);
+            setErrorDetail(error.message);
+
+        }
+        // it will output the data on the consol
+       
+    };
+    if (isSubmitted)
+         {
+            console.log(isSubmitted);
+               return <Navigate to="/login/admin"/>;
+                
+         }
+        else if(hasError){
+            return (
+                <>
+            <p> i am error</p>
+            <p>{errorDetail}</p>
+            </>
+            )
+        }
+  return (
+    
+    <CssVarsProvider>
+      <main>
+        <ModeToggle />
+        <Sheet
+          sx={{
+            width: 300,
+            mx: 'auto', // margin left & right
+            my: 4, // margin top & bottom
+            py: 3, // padding top & bottom
+            px: 2, // padding left & right
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            borderRadius: 'sm',
+            boxShadow: 'md',
+          }}
+          variant="outlined"
+        >
+          <div>
+            <Typography level="h4" component="h1">
+              <b>Welcome Adminn!!</b>
+            </Typography>
+            <Typography level="body-sm">Sign in to continue.</Typography>
+          </div>
+         <Form onSubmit = {handleSubmit(doLogin)}> 
+         <Field label="Admin-ID" error={errors?.id}>
+          <Input
+            {...register("id", { required: "Admin-ID is required"})}
+            type="number"
+            id="id"
+          />
+        </Field>
+        <Field label="Password" error={errors?.password}>
+          <Input
+            {...register("password", { required: "Password is required", pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                message: "Please check all the conditions of password"
+            } })}
+            type="password"
+            id="password"
+          />
+        </Field>    
+         <Button>Login</Button>
+          </Form>
+         {hasError && <p><b>Wrong credentials or server error.</b></p>}
+        </Sheet>
+      </main>
+    </CssVarsProvider>
+  );
+}
