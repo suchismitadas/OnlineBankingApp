@@ -46,6 +46,7 @@ export default function Login() {
     const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hasError, setHasError] = useState(false); 
+    const [errorDetail, setErrorDetail] = useState({});
     const doLogin = async (data) =>{
       
         console.log(data);
@@ -59,6 +60,8 @@ export default function Login() {
         }
         catch(error) {
         setHasError(true);
+        setErrorDetail(error.response.data);
+        console.log(error.response.data);
         }
         // it will output the data on the consol
        
@@ -115,7 +118,7 @@ export default function Login() {
         </Field>    
          <Button>Login</Button>
           </Form>
-          {hasError && <p><b>Wrong credentials or server error.</b></p>}
+          {hasError && <p><b>{errorDetail.code} {errorDetail.message} {errorDetail.property}</b></p>}
 
           <Typography
             endDecorator={<Link href="/register">Sign up</Link>}

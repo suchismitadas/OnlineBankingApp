@@ -10,39 +10,47 @@ import {Sheet } from '@mui/joy';
 
 const Admin=()=>{
     const [alluser,setAlluser] = useState([]);
-     
-
-    useEffect(()=> {
-        console.log("This is running");
+    const loggedInID = localStorage.getItem('id');
+            const token = localStorage.getItem('token');
+    const header = {
+        Authorization: `Bearer ${token}`
+        };
 
         const getData = async () => {
-            const loggedInID = localStorage.getItem('id');
-            const token = localStorage.getItem('token');
-            const header = {
             
-                Authorization: `Bearer ${token}`
-                };
-              try {  
-             const response = await axios.get(`http://localhost:3000/customer-details`, {headers: header});
-    
-            console.log(response.data);
-            setAlluser(response.data);   
-              } catch(error) {
-                console.log(error);
-              }
-        }
-        getData();
+           
+            try {  
+           const response = await axios.get(`http://localhost:8080/customer-details`, {headers: header});
+  
+          console.log(response.data);
+          setAlluser(response.data);   
+            } catch(error) {
+              console.log(error);
+            }
+      }
 
-        
+    useEffect(()=> {
+        console.log("This is running")
+        getData();
     },[]);
+
+    // useEffect
 
     const postdata= async (key)=>{
         console.log(key)
         console.log("runningggg")
-        const res=  await axios.post(`http://localhost:3000/customer-details/${key}`)
+        const res=  await axios.post(`http://localhost:8080/approve-customer/${key}`, {}, {headers: header});
+        getData();
     }
  const deletedata = async(key)=>{
-    const res = await axios.post(`http://localhost:3000/customer-details/${key}`)
+
+    try {
+    const res = await axios.post(`http://localhost:8080/deny-customer/${key}`, {}, {headers: header});
+    getData();
+
+    } catch(error) {
+        console.log(error);
+    }
  }
 
     return (
@@ -86,7 +94,7 @@ const Admin=()=>{
                         <td>${val.aadhar}</td>
                         {!val.customer.verifiedUser && <td><Button onClick={()=> postdata(val.id)} color="success">Approve</Button>
                         <Button onClick={()=> deletedata(val.id)}>Reject </Button> </td>}
-                        {val.customer.verifiedUser && <p>Approved</p>}
+                        {val.customer.verifiedUser && <td>Approved</td>}
                     </tr>
                 )
             })}</tbody>
