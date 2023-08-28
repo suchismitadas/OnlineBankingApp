@@ -1,7 +1,4 @@
 import React from "react";
-import ApprovedList from './admincomponents/approvedlist';
-import PendingList from './admincomponents/pending';
-import CustomerList from './admincomponents/viewall';
 import { Button } from "react-bootstrap";
 import { useState ,useEffect} from "react";
 import axios from 'axios';
@@ -10,7 +7,7 @@ import {Sheet } from '@mui/joy';
 
 const Admin=()=>{
     const [alluser,setAlluser] = useState([]);
-    const loggedInID = localStorage.getItem('id');
+    // const loggedInID = localStorage.getItem('id');
             const token = localStorage.getItem('token');
     const header = {
         Authorization: `Bearer ${token}`
@@ -40,12 +37,14 @@ const Admin=()=>{
         console.log(key)
         console.log("runningggg")
         const res=  await axios.post(`http://localhost:8080/approve-customer/${key}`, {}, {headers: header});
+        console.log(res.data);
         getData();
     }
  const deletedata = async(key)=>{
 
     try {
     const res = await axios.post(`http://localhost:8080/deny-customer/${key}`, {}, {headers: header});
+    console.log(res.data);
     getData();
 
     } catch(error) {
@@ -55,6 +54,7 @@ const Admin=()=>{
 
     return (
         <>
+        <b  style={{color:"white"}}> Logged in as Admin.</b>
         <Sheet
           sx={{
             width: 1500,

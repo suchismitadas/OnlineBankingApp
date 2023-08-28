@@ -5,16 +5,17 @@ import Dashlist from './components/dashlist';
 import Welcome from './components/welcome';
 import AccountSummary from "./AccountSummary";
 import AccountTransactions from "./AccountTransactions"
-import Login from './components/login-new'
-import Register2 from './components/register2';
+import UserLogin from './components/Userlogin'
+// import Register2 from './components/register2';
 import Profile from './profile';
-import { RegisterNew } from './components/register-new';
+import { Register} from './components/register';
 import { PersonalDetails } from './components/PersonalDetails';
 import { Confirm } from './components/Confirm';
 import { AppProvider } from './components/state';
 import History from './components/History';
-import Adminlogin from './components/login';
+import AdminLogin from './components/Adminlogin';
 import Admin from './components/admin';
+import Withdraw from './components/Withdraw'
 function App() {
   // const { register,handleSubmit, formState : {errors} } = useForm();
   //   const onSubmit = (e) =>{
@@ -28,19 +29,20 @@ function App() {
       <Router>
       <Routes>
       <Route path="/" element={<Home/>} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<RegisterNew/>} />
-      <Route path="/register2" element={<Register2/>} />
+      <Route path="/login" element={<UserLogin/>} />
+      <Route path="/register" element={<Register/>} />
+      {/* <Route path="/register2" element={<Register2/>} /> */}
       <Route path='/login/welcome' element={<Welcome/>}/>
+      <Route path="/withdraw" element ={<Withdraw/>}></Route>
       {/* <Route element={<Error/>}/> */}
       <Route path="/accountsummary" element={<AccountSummary/>} />
       <Route path="/accounttransactions" element={<AccountTransactions/>} />
       <Route path="/profile" element={<Profile/>}/>
-          <Route path="/register-new" element={<RegisterNew />} />
+          {/* <Route path="/register-new" element={<RegisterNew />} /> */}
           <Route path="/personal-details" element={<PersonalDetails />} />
           <Route path="/confirm" element={<Confirm />} />
           <Route path="/history" element={<History/>}/>
-          <Route path="/adminlogin" element={<Adminlogin/>}/>
+          <Route path="/adminlogin" element={<AdminLogin/>}/>
           <Route path="/login/admin" element={<Admin/>}/>
       </Routes>
       </Router>

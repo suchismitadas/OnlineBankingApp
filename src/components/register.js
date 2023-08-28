@@ -1,48 +1,34 @@
-import React from 'react';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-// import FormLabel from 'react-bootstrap/esm/FormLabel';
-import Button from 'react-bootstrap/esm/Button';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-// import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-// import FormHelperText from '@mui/joy/FormHelperText';
-// import Input from '@mui/joy/Input';
-import { CssVarsProvider } from '@mui/joy/styles';
+// Steps/Contact.js
+
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAppState } from "./state";
+import {Button, Input, Form, Field} from "./Forms";
 import Sheet from '@mui/joy/Sheet';
-// import Typography from '@mui/joy/Typography';
+import { CssVarsProvider } from "@mui/joy";
 
+export const Register= () => {
+  const [state, setState] = useAppState();
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm({ defaultValues: state.customer, mode: "onSubmit" });
+  const watchPassword = watch("password");
+  const navigate = useNavigate();
 
-const Register = () => {
+  const saveData = ({emailId, password}) => {
+    // console.log(state);
+    setState({...state, customer:{emailId, password}});
+    // console.log(state);
+    navigate("/personal-details");
+  };
 
-    const [firstName, setFname] = useState("");
- const [lastName, setLname] = useState("");
- const [dob, setDob] = useState("");
- const [aadhar, setAadhar] = useState(0);
- const [permanentAddress, setpermanentAddress] = useState("");
- const [mobileNumber, setMobile] = useState(0);
- const [pan, setPan] = useState(0);
- const [occupation, setOcc] = useState("");
-
-  //   const handleSubmit=(e)=>{
-  //       e.preventDefault();
-  //        let obj = {firstName, lastName, dob, aadhar, permanentAddress, mobileNumber, pan, occupation};
-  //       console.log(obj);
-  //       fetch("http://localhost:8000/customer-details",{
-  //       method:"POST",
-  //       headers:{'content-type':'application/json'},
-  //       body:JSON.stringify(obj)
-  //   });
-  // }
-
-    return (
-        <>
+  return (
+    <div>
         <CssVarsProvider>
-      <main>
-        
-        <Sheet
+    <Sheet
           sx={{
             width: 600,
             mx: 'auto', // margin left & right
@@ -57,66 +43,48 @@ const Register = () => {
           }}
           variant="outlined"
         >
-
+    <Form onSubmit={handleSubmit(saveData)}>
+      <fieldset>
+        <legend><b>Account Details</b></legend>
         
-        <div>
-            <p>Enter the details to open account </p>
-        </div>
-         <Form>
-            <FormLabel> User Name</FormLabel>
-      <Row>
-        <Col>
-          <Form.Control type="text "value={firstName} onChange={e=> setFname(e.target.value)} placeholder="First name" />
-        </Col>
-        <Col>
-          <Form.Control value={lastName} onChange={e=> setLname(e.target.value)} placeholder="Last name" required="" />
-        </Col>
-      </Row>
-
-      <Form.Group className="mb-3" controlId="dob">
-        <Form.Label>Date of Birth</Form.Label>
-        <Form.Control  type= "date" value={dob} onChange={e=> setDob(e.target.value)} placeholder="DD/MM/YYYY" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="mobileNumber">
-        <Form.Label>mobileNumber</Form.Label>
-        <Form.Control type="tel" max="10" value={mobileNumber} onChange={e=> setMobile(e.target.value)} placeholder="0123456789" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formGridAddress1">
-        <Form.Label>Address</Form.Label>
-        <Form.Control value={permanentAddress} onChange={e=> setpermanentAddress(e.target.value)} placeholder="1234 Main St" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="aadhar">
-        <Form.Label>aadhar No</Form.Label>
-        <Form.Control  type="number" value={aadhar} onChange={e=> setAadhar(e.target.value)}placeholder="1234 5678 1234" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="PAN">
-        <Form.Label>PAN </Form.Label>
-        <Form.Control value={pan} onChange={e=> setPan (e.target.value)}placeholder="123ZZ456" error="true" defaultValue=" error found" required  />
-      </Form.Group>
-
-      
-
-         <Form.Group className="mb-3" controlId="formGridAddress1">
-        <Form.Label>Occupation</Form.Label>
-        <Form.Control value={occupation} onChange={e=> setOcc(e.target.value)} placeholder="Student/Doctor/military" />
-      </Form.Group>
-     <Link to="/register2" state={{firstName, lastName, dob, aadhar, permanentAddress, mobileNumber, pan, occupation}}>
-      <Button variant="primary" type="submit" >
-       Next
-      </Button>
-      </Link>
+        <Field label="Email" error={errors?.emailId}>
+          <Input
+            {...register("emailId", { required: "Email is required", 
+                                    pattern: {
+                                        value : /^[^@ ]+@[^@]+\.[^@.]{2,}$/ ,
+                                        message: "Please enter valid email"
+                                    }})}
+            type="email"
+            id="emailId"
+          />
+        </Field>
+        <Field label="Password" error={errors?.password}>
+          <Input
+            {...register("password", { required: "Password is required", pattern: {
+                value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                message: "Please check all the conditions of password"
+            } })}
+            type="password"
+            id="password"
+          />
+        </Field>
+          <p style={{fontSize: "10px"}}>Password should be of 6-15 characters containing capital letter and small letter </p>
+        <Field label="Confirm password" error={errors?.confirmPassword}>
+          <Input
+            {...register("confirmPassword", {
+              required: "Confirm the password",
+              validate: (value) =>
+                value === watchPassword || "The passwords do not match",
+            })}
+            type="password"
+            id="password-confirm"
+          />
+        </Field>
+        <Button>Next {">"}</Button>
+      </fieldset>
     </Form>
-    <p><Link to="/">Go back</Link></p>
     </Sheet>
-      </main>
     </CssVarsProvider>
-        </>
-
-    )
-}
-
-export default Register;
+    </div>
+  );
+};

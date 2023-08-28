@@ -7,16 +7,42 @@ import { Sheet, CssVarsProvider } from "@mui/joy";
 import Navbar from "./components/navbar";
 import axios from "axios";
 import { useState } from "react";
-
+import { Card, Grid,CardMedia, CardContent,Typography } from "@mui/material";
+import { useEffect } from "react";
 const AccountTransactions = () => {
 
 // 
     const [success, setSuccess] = useState();
     const [error, setError] = useState({});
+    const[details, setDetails ]= useState({});
+    const [loading, setLoading] = useState(true);
 const [hasError, setHasError] = useState(false);
     // console.log(state);
     const { handleSubmit, register, formState: { errors } } = useForm();
     // const navigate = useNavigate();
+    const getBalance = async() => {
+        try {
+            const token = localStorage.getItem('token');
+            const header = {
+                
+            Authorization: `Bearer ${token}`
+            };
+            const loggedInID = localStorage.getItem('id');
+            const res = await axios.get(`http://localhost:8080/customer-details/${loggedInID}`, {headers: header});
+    
+            console.log(res.data);
+            setDetails(res.data);
+            setLoading(false);
+            // setSuccess(true);
+    }
+    catch(error) {
+        // setError(error);
+        console.log(error.response.data);
+    }
+    }
+    useEffect(() => {
+        getBalance();
+    }, []);
 
     const saveData = async (data) => {
         // setState({ ...state, customerDetails: data });
@@ -47,12 +73,16 @@ const [hasError, setHasError] = useState(false);
 
     };
 
+    if(loading) return <h1>Loading...</h1>
     return (
-        < div className="container d-flex align-items-center flex-column" style={{ color: "white" }}>
+        // < div className="container d-flex align-items-center flex-column" style={{ color: "white" }}>
+        <>
+        
             <Navbar />
-            <CssVarsProvider>
+            
+           
                 <Sheet sx={{
-                    width: 600,
+                    width: 1000,
                     mx: 'auto', // margin left & right
                     my: 4, // margin top & bottom
                     py: 3, // padding top & bottom
@@ -64,7 +94,9 @@ const [hasError, setHasError] = useState(false);
                     boxShadow: 'md',
                 }}
                     variant="outlined">
-
+<Grid container>
+<Grid item xs={8} >
+      
 
                     <h3> Transfer Funds </h3>
                     <Form onSubmit={handleSubmit(saveData)}>
@@ -92,8 +124,8 @@ const [hasError, setHasError] = useState(false);
                             </Col>
                         </Row>
 
-                        <div class="row mb-3">
-                            <Field label="amount"  error={errors?.amount}>
+                        <div className="row mb-3">
+                            <Field label="AMOUNT"  error={errors?.amount}>
                                 <Input
                                     {...register("amount", {
                                         required: "Amount is required",
@@ -106,22 +138,21 @@ const [hasError, setHasError] = useState(false);
                             </Field>
                         </div>
 
-                        <div class="row mb-3">
-                        <Field label="remark"  error={errors?.Remark}>
+                        <div className="row mb-3">
+                        <Field label="REMARK"  error={errors?.Remark}>
                                 <Input
                                     {...register("remark", {
                                         required: "Remark is required",
-                                        
-                                        
+                        
                                     })}
                                     id="remark"
                                     type="text"
                                 />
                             </Field>
                         </div>
-                        <fieldset class="row mb-3">
-                            <legend class="col-form-label  pt-0">Type of Transaction </legend>
-                            <div  align="center" >
+                        <fieldset className="row mb-3">
+                            <legend className="col-form-label  pt-0">TYPE OF TRANSACTION </legend>
+                            <div  className="row mb-3" align="center" >
                             <Field label="NEFT"  error={errors?.type}>
                                 <input
                                     {...register("type")}
@@ -149,7 +180,7 @@ const [hasError, setHasError] = useState(false);
                             </div>
                         </fieldset>
 
-                        <Button>Send {">"}</Button>
+                        <Button>Send </Button>
 
 
                     </Form>
@@ -160,9 +191,37 @@ const [hasError, setHasError] = useState(false);
         <p style={{textAlign: 'center'}}> <strong>{error.property}</strong>: {error.code}. <br></br>
         <strong>Description: </strong>{error.message}</p>
         </div>}
+        </Grid>
+                
+                <Grid  item xs={4}> 
+                <Card sx={{ width: 250, height:250 }}>
+                <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    
+
+                    image="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                />
+            </Card>
+            <Typography gutterBottom variant="h5" component="div">
+             </Typography>
+             <Typography variant="body2" color="text.secondary" style={{textAlign:"left"}}>
+            <b>Welcome !!</b> {details.firstName} {details.lastName}
+             <p>Customer Id: {details.customer.id}</p> 
+             <p>Email: {details.customer.emailId}</p>
+             <p>Account Number: {details.customer.accounts[0].accountNumber}</p>
+
+            <p>Balance: {details.customer.accounts[0].balance}</p>
+
+             </Typography>
+                </Grid>
+        </Grid>
                 </Sheet>
-            </CssVarsProvider>
-        </div>
+                
+             
+            
+        {/* </div> */}
+        </>
     )
 }
 export default AccountTransactions;

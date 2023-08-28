@@ -1,6 +1,6 @@
 import React from "react";
 // import Navbar from "./components/navbar";
-import { Card, AspectRatio, Typography } from "@mui/joy";
+import { Card, Typography } from "@mui/joy";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Navbar from "./components/navbar";

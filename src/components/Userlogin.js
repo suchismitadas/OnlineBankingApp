@@ -41,7 +41,7 @@ function ModeToggle() {
   );
 }
 
-export default function Login() {
+export default function UserLogin() {
 
     const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -118,7 +118,10 @@ export default function Login() {
         </Field>    
          <Button>Login</Button>
           </Form>
-          {hasError && <p><b>{errorDetail.code} {errorDetail.message} {errorDetail.property}</b></p>}
+          {hasError && <div>
+        <p style={{textAlign: 'center'}}> <strong>{errorDetail.property}</strong>{errorDetail.code} <br></br>
+        <strong>Description: </strong>{errorDetail.message}</p>
+        </div>}
 
           <Typography
             endDecorator={<Link href="/register">Sign up</Link>}

@@ -41,7 +41,7 @@ function ModeToggle() {
   );
 }
 
-export default function Login() {
+export default function AdminLogin() {
 
     const {register,handleSubmit ,formState:{errors}} = useForm({defaultValues: {id: 1, password:123456}});
     const [isSubmitted, setIsSubmitted] = useState(false);

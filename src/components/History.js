@@ -1,11 +1,12 @@
 import React from "react";
 import Navbar from "./navbar";
 import { Sheet } from "@mui/joy";
-import { Stack, tableBodyClasses } from "@mui/material";
+import { Grid, Stack, tableBodyClasses } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import {Table}  from "react-bootstrap";
-
+import {Card ,CardMedia,CardContent,Typography} from "@mui/material";
+import { Link } from "react-router-dom";
 
 const History=()=>{
 
@@ -39,6 +40,7 @@ const History=()=>{
         <Sheet
           sx={{
             width: 600,
+            
             mx: 'auto', // margin left & right
             my: 4, // margin top & bottom
             py: 3, // padding top & bottom
@@ -51,8 +53,33 @@ const History=()=>{
           }}
           variant="outlined"
         >
+            <Grid container>
+        <Grid>
+        <Card sx={{ width: 100, height:100 }}>
+                <CardMedia
+                    component="img"
+                    alt="green iguana"
+                    
 
-            hiee there 
+                    image="https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg"
+                />
+                
+                    
+               
+            </Card>
+            </Grid>
+            <Grid xs={6}>
+            <Typography gutterBottom variant="h5" component="div">
+             
+            
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" style={{textAlign:"center"}}>
+                    <b>Welcome !!</b> to your Account
+                    {!accthistory && <div style={{textAlign:"center"}}><p><b>No Transactions Found</b></p></div>} 
+
+                    </Typography>
+            </Grid>
+            </Grid>
         </Sheet>
 
         <Sheet
@@ -84,6 +111,7 @@ const History=()=>{
             </tr>
             </thead>
             <tbody>
+           {!accthistory && <div ><p><Link to="/accounttransactions">Send Money</Link></p></div>} 
             {accthistory.map((val,key)=>{
                 return(
                     <tr key = {key}>
