@@ -70,15 +70,7 @@ export default function AdminLogin() {
          {
             console.log(isSubmitted);
                return <Navigate to="/login/admin"/>;
-                
-         }
-        else if(hasError){
-            return (
-                <>
-            <p> i am error</p>
-            <p>{errorDetail}</p>
-            </>
-            )
+  
         }
   return (
     

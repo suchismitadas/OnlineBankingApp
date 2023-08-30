@@ -75,7 +75,7 @@ const History=()=>{
                     </Typography>
                     <Typography variant="body2" color="text.secondary" style={{textAlign:"center"}}>
                     <b>Welcome !!</b> to your Account
-                    {!accthistory && <div style={{textAlign:"center"}}><p><b>No Transactions Found</b></p></div>} 
+                    {accthistory.length == 0 && <div style={{textAlign:"center"}}><p><b>No Transactions Found</b></p></div>} 
 
                     </Typography>
             </Grid>

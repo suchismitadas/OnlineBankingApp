@@ -5,8 +5,8 @@ import Tab from '@mui/joy/Tab';
 import { Link } from "react-router-dom";
 
 const doLogout = () => {
-    localStorage.deleteItem("token");
-    localStorage.deleteItem("id");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
 }
 
 

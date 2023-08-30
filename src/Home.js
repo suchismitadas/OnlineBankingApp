@@ -115,7 +115,7 @@ const Home = () => {
                     variant="outlined">
                     <div className="container d-flex align-items-left flex-column" style={{ color: "white" }} >
                       <nav>
-                        <h4 style={{ fontFamily: "Times New Roman", color: "Black" }}> Welcom Admin !</h4>
+                        <h4 style={{ fontFamily: "Times New Roman", color: "Black" }}> Welcome Admin !</h4>
                         <NavLink to="/adminlogin">
                           <Button sx={{ mt: 1 /* margin top */ }} >Login</Button></NavLink>
                         
